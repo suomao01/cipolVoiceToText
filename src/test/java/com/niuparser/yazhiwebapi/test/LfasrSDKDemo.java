@@ -1,5 +1,7 @@
 package com.niuparser.yazhiwebapi.test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 
 import com.alibaba.fastjson.JSON;
@@ -8,6 +10,7 @@ import com.iflytek.msp.cpdb.lfasr.exception.LfasrException;
 import com.iflytek.msp.cpdb.lfasr.model.LfasrType;
 import com.iflytek.msp.cpdb.lfasr.model.Message;
 import com.iflytek.msp.cpdb.lfasr.model.ProgressStatus;
+import org.springframework.util.ResourceUtils;
 
 /**
  * 非实时转写SDK调用demo
@@ -31,6 +34,13 @@ public class LfasrSDKDemo {
     private static int sleepSecond = 20;
 
     public static void main(String[] args) {
+        File path = null;
+        try {
+            path = new File(ResourceUtils.getURL("classpath:").getPath());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        System.out.println(path.getAbsolutePath());
         // 初始化LFASRClient实例
         LfasrClientImp lc = null;
         try {
